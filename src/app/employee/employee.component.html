@@ -1,0 +1,69 @@
+<div class="main-body row align-items-start justify-content-between">
+  <mat-card class="example-card col-lg-6">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <mat-card-title
+        >{{ employee.firstName }} {{ employee.lastName }}</mat-card-title
+      >
+      <mat-card-subtitle>{{ employee.company }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      width="200"
+      src="https://cdn.dribbble.com/users/304574/screenshots/6222816/male-user-placeholder.png"
+      alt="Photo of a Shiba Inu"
+    />
+    <mat-card-content class="p-3">
+      <p><b>Email:</b> {{ employee.email }}</p>
+      <p><b>Date of birth:</b> {{ employee.dob | date }}</p>
+      <p><b>Gender:</b> {{ employee.gender | uppercase }}</p>
+      <p><b>Education:</b> {{ employee.education }}</p>
+      <p><b>Company:</b> {{ employee.company }}</p>
+      <p><b>Experience: </b>{{ employee.experience }}</p>
+      <p><b>Package: </b> {{ employee.package | currency : "EUR" }}</p>
+    </mat-card-content>
+  </mat-card>
+  <div class="col-lg-6">
+    <form [formGroup]="tasksForm" (ngSubmit)="saveTasks()">
+      <div formArrayName="tasks">
+        <!-- Itera attraverso gli elementi del form array -->
+        <div
+          *ngFor="let taksControl of controls; let i = index"
+          [formGroupName]="i"
+          class="d-flex align-items-start gap-2"
+        >
+          <mat-form-field appearance="outline">
+            <mat-label>Task Name</mat-label>
+            <input formControlName="task" matInput type="text" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <mat-select formControlName="state">
+              <mat-option *ngFor="let state of states" [value]="state">
+                {{ state }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button color="warn" (click)="removeTask(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="mt-3">
+        <button
+          mat-raised-button
+          type="button"
+          class="bg-success text-white me-1"
+          (click)="addTask()"
+        >
+          Add
+        </button>
+        <button type="submit" mat-raised-button color="primary">
+          Save Tasks
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

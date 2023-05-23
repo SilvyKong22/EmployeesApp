@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{ type | uppercase }}</h1>
+<div mat-dialog-content>
+  <p [ngClass]="type === 'error' ? 'text-danger' : ''">
+    {{ message }}
+  </p>
+</div>
+<div mat-dialog-actions class="action">
+  <button *ngIf="type === 'warning'" mat-raised-button mat-dialog-close>
+    Back
+  </button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true">
+    {{ action }}
+  </button>
+</div>

@@ -1,0 +1,53 @@
+<div class="main-body">
+  <mat-chip-listbox class="mb-4" aria-label="Fish selection">
+    <mat-chip-option
+      [selected]="selectedStatus === 'All'"
+      (selectionChange)="filterByStatus('All')"
+    >
+      All
+    </mat-chip-option>
+    <mat-chip-option
+      [selected]="selectedStatus === 'To do'"
+      (selectionChange)="filterByStatus('To do')"
+    >
+      To do
+    </mat-chip-option>
+    <mat-chip-option
+      [selected]="selectedStatus === 'Completed'"
+      (selectionChange)="filterByStatus('Completed')"
+    >
+      Completed
+    </mat-chip-option>
+  </mat-chip-listbox>
+
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Filter by Employee</mat-label>
+    <input
+      matInput
+      (keyup)="filterByEmployee(input.value)"
+      placeholder="Ex. Mia"
+      #input
+    />
+  </mat-form-field>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Employee</th>
+          <th scope="col">Tasks</th>
+          <th scope="col">State</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let employee of filteredEmployees">
+        <tr *ngFor="let task of employee.tasks; let i = index">
+          <td>
+            {{ i === 0 ? employee.firstName + " " + employee.lastName : "" }}
+          </td>
+          <td>{{ task.task }}</td>
+          <td>{{ task.state }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

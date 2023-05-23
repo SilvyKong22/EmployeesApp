@@ -1,0 +1,13 @@
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  padding: 0;
+}
+
+.main-body {
+  max-width: 1600px;
+  margin: auto;
+  padding: 2rem;
+  mat-form-field {
+    width: 100%;
+  }
+}
