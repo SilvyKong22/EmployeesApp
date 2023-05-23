@@ -1,10 +1,24 @@
-# AngularCrud
+# EmployeesApp
+
+- An Angular app for managing employees and their tasks, featuring a complete CRUD functionality.
+- Employee list view with filtering, pagination, and material design table for easy information overview.
+- Employee details page for adding and editing tasks, enabling efficient task management.
+- Task summary view with Bootstrap table, allowing filtering by completed and pending tasks using material chips.
+- Efficiently track and organize employee tasks with a comprehensive UI, utilizing Angular's core functionality.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Install JSON Server
+
+npm install -g json-server
+
+## Start JSON Server
+
+json-server --watch db.json
 
 ## Code scaffolding
 
