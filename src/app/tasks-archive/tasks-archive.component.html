@@ -1,21 +1,9 @@
 <div class="main-body">
   <mat-chip-listbox class="mb-4" aria-label="Fish selection">
-    <mat-chip-option
-      [selected]="selectedStatus === 'All'"
-      (selectionChange)="filterByStatus('All')"
-    >
-      All
-    </mat-chip-option>
-    <mat-chip-option
-      [selected]="selectedStatus === 'To do'"
-      (selectionChange)="filterByStatus('To do')"
-    >
+    <mat-chip-option (selectionChange)="filterByStatus('To do')">
       To do
     </mat-chip-option>
-    <mat-chip-option
-      [selected]="selectedStatus === 'Completed'"
-      (selectionChange)="filterByStatus('Completed')"
-    >
+    <mat-chip-option (selectionChange)="filterByStatus('Completed')">
       Completed
     </mat-chip-option>
   </mat-chip-listbox>
@@ -33,20 +21,33 @@
   <div class="table-responsive">
     <table class="table">
       <thead>
-        <tr>
+        <tr class="tr_head">
           <th scope="col">Employee</th>
           <th scope="col">Tasks</th>
           <th scope="col">State</th>
         </tr>
       </thead>
-      <tbody *ngFor="let employee of filteredEmployees">
-        <tr *ngFor="let task of employee.tasks; let i = index">
-          <td>
-            {{ i === 0 ? employee.firstName + " " + employee.lastName : "" }}
-          </td>
-          <td>{{ task.task }}</td>
-          <td>{{ task.state }}</td>
-        </tr>
+      <tbody>
+        <ng-container *ngFor="let employee of filteredEmployees">
+          <tr
+            *ngFor="
+              let task of employee.tasks;
+              let i = index;
+              last as isLast;
+              first as isFirst
+            "
+            [ngClass]="{
+              tr_group_last: isLast,
+              tr_group_first: isFirst
+            }"
+          >
+            <td>
+              {{ i === 0 ? employee.firstName + " " + employee.lastName : "" }}
+            </td>
+            <td>{{ task.task }}</td>
+            <td>{{ task.state }}</td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>

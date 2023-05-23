@@ -9,14 +9,13 @@ import { DataStorageService } from '../services/data-storage.service';
 export class TasksArchiveComponent implements OnInit {
   employees: any[] = [];
   filteredEmployees: any[] = [];
-  selectedStatus: string = 'All';
+  selectedStatus: string;
   constructor(private _dataStorage: DataStorageService) {}
 
   ngOnInit(): void {
     this._dataStorage.getEmployeeList().subscribe((employees) => {
       this.employees = employees;
       this.filteredEmployees = [...employees];
-      this.filterByStatus('All');
     });
   }
 
@@ -32,23 +31,28 @@ export class TasksArchiveComponent implements OnInit {
   }
 
   filterByStatus(status: string): void {
-    this.selectedStatus = status;
-    console.log(this.selectedStatus);
-
-    if (status !== 'All') {
-      this.filteredEmployees = this.employees
-        .map((employee: any) => {
-          if (employee.tasks && employee.tasks.length > 0) {
-            const filteredTasks = employee.tasks.filter(
-              (task: any) => task.state === status
-            );
-            return { ...employee, tasks: filteredTasks };
-          } else {
-            return employee;
-          }
-        })
-        .filter((employee: any) => employee.tasks && employee.tasks.length > 0);
+    if (this.selectedStatus !== status) {
+      this.selectedStatus = status;
+      if (status !== 'All') {
+        this.filteredEmployees = this.employees
+          .map((employee: any) => {
+            if (employee.tasks && employee.tasks.length > 0) {
+              const filteredTasks = employee.tasks.filter(
+                (task: any) => task.state === status
+              );
+              return { ...employee, tasks: filteredTasks };
+            } else {
+              return employee;
+            }
+          })
+          .filter(
+            (employee: any) => employee.tasks && employee.tasks.length > 0
+          );
+      } else {
+        this.filteredEmployees = [...this.employees];
+      }
     } else {
+      this.selectedStatus = 'All';
       this.filteredEmployees = [...this.employees];
     }
   }
