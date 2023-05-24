@@ -9,7 +9,7 @@ import { DataStorageService } from '../services/data-storage.service';
 export class TasksArchiveComponent implements OnInit {
   employees: any[] = [];
   filteredEmployees: any[] = [];
-  selectedStatus: string;
+  selectedStatus: string = 'All';
   constructor(private _dataStorage: DataStorageService) {}
 
   ngOnInit(): void {
@@ -21,7 +21,6 @@ export class TasksArchiveComponent implements OnInit {
 
   filterByEmployee(event: any): void {
     const filterValue = event.toLowerCase();
-
     this.filteredEmployees = this.employees.filter((employee: any) => {
       const fullName =
         `${employee.firstName} ${employee.lastName}`.toLowerCase();

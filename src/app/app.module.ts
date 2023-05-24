@@ -29,6 +29,7 @@ import { EmployeesArchiveComponent } from './employees-archive/employees-archive
 import { MatBadgeModule } from '@angular/material/badge';
 import { TasksArchiveComponent } from './tasks-archive/tasks-archive.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { ProjAddEditComponent } from './proj-add-edit/proj-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MatChipsModule } from '@angular/material/chips';
     EmployeeComponent,
     EmployeesArchiveComponent,
     TasksArchiveComponent,
+    ProjAddEditComponent,
   ],
   imports: [
     BrowserModule,

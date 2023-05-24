@@ -18,6 +18,10 @@
         {
           "task": "Interactively transition interoperable.",
           "state": "To do"
+        },
+        {
+          "task": "Appropriately coordinate viral.",
+          "state": "In progress"
         }
       ],
       "id": 13
@@ -45,6 +49,7 @@
       "id": 18
     },
     {
+      "role": "Project Manager",
       "firstName": "Tallulah",
       "lastName": "Gregory",
       "email": "vemitodixi@mailinator.com",
@@ -54,13 +59,13 @@
       "company": "Cooke Gaines Plc",
       "experience": 30,
       "package": 6,
-      "id": 21,
       "tasks": [
         {
           "task": "Salutare tutti",
           "state": "Completed"
         }
-      ]
+      ],
+      "id": 21
     },
     {
       "firstName": "Octavius",
@@ -81,6 +86,7 @@
       ]
     },
     {
+      "role": "Project Manager",
       "firstName": "Zelenia",
       "lastName": "Hoover",
       "email": "migo@mailinator.com",
@@ -112,6 +118,7 @@
       ]
     },
     {
+      "role": "Project Manager",
       "firstName": "Zeph",
       "lastName": "Forbes",
       "email": "zupywor@mailinator.com",
@@ -188,6 +195,7 @@
       "id": 34
     },
     {
+      "role": "Project Manager",
       "firstName": "Brody",
       "lastName": "Rodriquez",
       "email": "sykekonimi@mailinator.com",
@@ -251,6 +259,34 @@
         }
       ],
       "id": 38
+    },
+    {
+      "role": "Project Manager",
+      "firstName": "Beverly",
+      "lastName": "Davenport",
+      "email": "risigux@mailinator.com",
+      "dob": "2002-12-17T23:00:00.000Z",
+      "gender": "male",
+      "education": "Post Graduate",
+      "company": "Woodward and Fuller Plc",
+      "experience": 81,
+      "package": 98,
+      "tasks": [],
+      "id": 39
+    },
+    {
+      "role": "Project Manager",
+      "firstName": "Angela",
+      "lastName": "Mason",
+      "email": "pylugel@mailinator.com",
+      "dob": "2016-07-26T22:00:00.000Z",
+      "gender": "male",
+      "education": "Graduate",
+      "company": "Rivers Coleman LLC",
+      "experience": 3,
+      "package": 40,
+      "tasks": [],
+      "id": 40
     }
   ]
 }

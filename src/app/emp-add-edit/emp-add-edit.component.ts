@@ -25,6 +25,8 @@ export class EmpAddEditComponent implements OnInit {
     'Post Graduate',
   ];
 
+  roles: string[] = ['Project Manager', 'Employee'];
+
   constructor(
     private _fb: FormBuilder,
     private _dataStorage: DataStorageService,
@@ -34,6 +36,7 @@ export class EmpAddEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.empForm = this._fb.group({
+      role: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -109,6 +112,7 @@ export class EmpAddEditComponent implements OnInit {
           next: (val: any) => {
             this._coreService.openSnackBar('Employee ADDED succefully!');
             this._dialogFormRef.close(true);
+            console.log(val);
           },
           error: (err: any) => {
             this._dialog.open(DialogComponent, {

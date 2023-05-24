@@ -18,7 +18,8 @@ export class EmployeeComponent implements OnInit {
   employeeID: number;
   employee: any = {};
   tasksForm: FormGroup;
-  states = ['To do', 'Completed'];
+  states = ['To do', 'In progress', 'Completed'];
+  priorities = ['Low', 'Medium', 'High', 'Urgent'];
 
   constructor(
     private route: ActivatedRoute,

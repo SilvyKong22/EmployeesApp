@@ -46,6 +46,17 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <!-- <mat-form-field appearance="outline">
+            <mat-label>Priority</mat-label>
+            <mat-select formControlName="priority">
+              <mat-option
+                *ngFor="let priority of priorities"
+                [value]="priority"
+              >
+                {{ priority }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
           <button mat-icon-button color="warn" (click)="removeTask(i)">
             <mat-icon>delete</mat-icon>
           </button>
