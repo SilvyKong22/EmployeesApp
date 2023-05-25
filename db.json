@@ -1,4 +1,28 @@
 {
+  "projects": [
+    {
+      "Project Name": "Progetto Test",
+      "Description": "Descrizione Progetto test",
+      "Start Date": "1983-11-30T23:00:00.000Zm",
+      "Due Date": "1983-11-30T23:00:00.000Z",
+      "Status": "Partito",
+      "Project Manager": "Pinco Pallo",
+      "Assigned Resources": "[]",
+      "Comments or Notes": "",
+      "id": 1
+    },
+    {
+      "Project Name": "Progetto Test 2",
+      "Description": "Descrizione Progetto test 2",
+      "Start Date": "1983-11-30T23:00:00.000Zm",
+      "Due Date": "1983-11-30T23:00:00.000Z",
+      "Status": "Scaduto",
+      "Project Manager": "Sempronio Tizio",
+      "Assigned Resources": [],
+      "Comments or Notes": "",
+      "id": 2
+    }
+  ],
   "employees": [
     {
       "firstName": "Reeds",
@@ -287,6 +311,34 @@
       "package": 40,
       "tasks": [],
       "id": 40
+    },
+    {
+      "role": "Employee",
+      "firstName": "Heather",
+      "lastName": "Battle",
+      "email": "pejujojox@mailinator.com",
+      "dob": "1981-03-05T23:00:00.000Z",
+      "gender": "male",
+      "education": "Matric",
+      "company": "Bean Talley Trading",
+      "experience": 100,
+      "package": 80,
+      "tasks": [],
+      "id": 41
+    },
+    {
+      "role": "Employee",
+      "firstName": "Jeremy",
+      "lastName": "Collins",
+      "email": "dipug@mailinator.com",
+      "dob": "1994-09-02T22:00:00.000Z",
+      "gender": "male",
+      "education": "Intermediate",
+      "company": "Nguyen and Daniel Associates",
+      "experience": 3,
+      "package": 82,
+      "tasks": [],
+      "id": 42
     }
   ]
 }

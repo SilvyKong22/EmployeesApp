@@ -15,6 +15,7 @@ import { CoreService } from '../core/core.service';
   styleUrls: ['./employee.component.scss'],
 })
 export class EmployeeComponent implements OnInit {
+  isLoading: boolean;
   employeeID: number;
   employee: any = {};
   tasksForm: FormGroup;
@@ -30,8 +31,12 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.employeeID = this.route.snapshot.params['id'];
+    this.isLoading = true;
     this._dataStorage.getEmployee(this.employeeID).subscribe((employee) => {
-      this.employee = employee;
+      setTimeout(() => {
+        this.employee = employee;
+        this.isLoading = false;
+      }, 1000);
     });
     this.initForm();
   }
@@ -57,6 +62,8 @@ export class EmployeeComponent implements OnInit {
 
     // Aggiungi i task all'oggetto employee
     this.employee.tasks = tasks;
+    console.log(this.employee);
+
     // Effettua le operazioni di salvataggio
     // ...
     this._dataStorage

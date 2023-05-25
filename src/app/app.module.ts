@@ -30,6 +30,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { TasksArchiveComponent } from './tasks-archive/tasks-archive.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { ProjAddEditComponent } from './proj-add-edit/proj-add-edit.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ProjAddEditComponent } from './proj-add-edit/proj-add-edit.component';
     MatCardModule,
     MatBadgeModule,
     MatChipsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

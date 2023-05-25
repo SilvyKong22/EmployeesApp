@@ -7,44 +7,47 @@ import { Observable } from 'rxjs';
 })
 export class DataStorageService {
   constructor(private _http: HttpClient) {}
+  URIJsonServer = 'http://localhost:3000/employees';
+  URIFirebase =
+    'https://employees-app-d0372-default-rtdb.europe-west1.firebasedatabase.app/employees';
 
-  // EMPLOYEES
+  // EMPLOYEES FIREBASE SERVER
   addEmployee(data: any): Observable<any> {
-    return this._http.post('http://localhost:3000/employees', data);
+    return this._http.post(`${this.URIFirebase}.json`, data);
   }
-  updateEmployee(id: number, data: any): Observable<any> {
-    return this._http.put(`http://localhost:3000/employees/${id}`, data);
+  updateEmployee(id: any, data: any): Observable<any> {
+    return this._http.put(`${this.URIFirebase}/${id}.json`, data);
   }
 
-  getEmployee(id: number): Observable<any> {
-    return this._http.get(`http://localhost:3000/employees/${id}`);
+  getEmployee(id: any): Observable<any> {
+    return this._http.get(`${this.URIFirebase}/${id}.json`);
   }
 
   getEmployeeList(): Observable<any> {
-    return this._http.get('http://localhost:3000/employees');
+    return this._http.get(`${this.URIFirebase}.json`);
   }
 
-  deleteEmployee(id: number): Observable<any> {
-    return this._http.delete(`http://localhost:3000/employees/${id}`);
+  deleteEmployee(id: any): Observable<any> {
+    return this._http.delete(`${this.URIFirebase}/${id}.json`);
   }
 
-  // PROJECTS
-  addProject(data: any): Observable<any> {
-    return this._http.post('http://localhost:3000/projects', data);
-  }
-  updateProject(id: number, data: any): Observable<any> {
-    return this._http.put(`http://localhost:3000/projects/${id}`, data);
-  }
+  // EMPLOYEES JSON SERVER
+  // addEmployee(data: any): Observable<any> {
+  //   return this._http.post(`${this.URIJsonServer}`, data);
+  // }
+  // updateEmployee(id: number, data: any): Observable<any> {
+  //   return this._http.put(`${this.URIJsonServer}/${id}`, data);
+  // }
 
-  getProject(id: number): Observable<any> {
-    return this._http.get(`http://localhost:3000/projects/${id}`);
-  }
+  // getEmployee(id: number): Observable<any> {
+  //   return this._http.get(`${this.URIJsonServer}/${id}`);
+  // }
 
-  getProjectList(): Observable<any> {
-    return this._http.get('http://localhost:3000/projects');
-  }
+  // getEmployeeList(): Observable<any> {
+  //   return this._http.get(`${this.URIJsonServer}`);
+  // }
 
-  deleteProject(id: number): Observable<any> {
-    return this._http.delete(`http://localhost:3000/projects/${id}`);
-  }
+  // deleteEmployee(id: number): Observable<any> {
+  //   return this._http.delete(`${this.URIJsonServer}/${id}`);
+  // }
 }

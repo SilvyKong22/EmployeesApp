@@ -36,6 +36,7 @@ export class EmpAddEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.empForm = this._fb.group({
+      id: '',
       role: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -52,6 +53,7 @@ export class EmpAddEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.empForm.patchValue(this.data);
+
     if (this.data && this.data.tasks) {
       // UPDATE MODE
       const tasksArray = this.empForm.get('tasks') as FormArray;
@@ -69,16 +71,18 @@ export class EmpAddEditComponent implements OnInit {
   onFormSubmit() {
     if (this.empForm.valid) {
       const employeeData = { ...this.empForm.value };
+
       employeeData.tasks = employeeData.tasks.map((task: any) => ({
         task: task.task,
         state: task.state,
       }));
+      console.log(employeeData);
 
       if (this.data) {
         const dialogConfirm = this._dialog.open(DialogComponent, {
           data: {
             employee: employeeData,
-            message: `Are you sure to update ${employeeData.firstName} ${employeeData.lastName}?`,
+            message: `Are you sure to update ${this.data.firstName} ${this.data.lastName}?`,
             action: 'Update',
             type: 'warning',
           },
@@ -108,11 +112,19 @@ export class EmpAddEditComponent implements OnInit {
           }
         });
       } else {
+        // ADD EMPLOYEE
+        // + INTEGRAZIONE ID ALL'OGGETTO CON UPDATE
         this._dataStorage.addEmployee(this.empForm.value).subscribe({
           next: (val: any) => {
+            this._dataStorage
+              .updateEmployee(val['name'], {
+                ...this.empForm.value,
+                id: val['name'],
+              })
+              .subscribe((x) => console.log(x));
+
             this._coreService.openSnackBar('Employee ADDED succefully!');
             this._dialogFormRef.close(true);
-            console.log(val);
           },
           error: (err: any) => {
             this._dialog.open(DialogComponent, {

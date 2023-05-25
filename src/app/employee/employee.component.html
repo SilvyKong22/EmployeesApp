@@ -25,7 +25,7 @@
       <p><b>Package: </b> {{ employee.package | currency : "EUR" }}</p>
     </mat-card-content>
   </mat-card>
-  <div class="col-lg-6">
+  <div class="col-lg-6 position-relative">
     <form [formGroup]="tasksForm" (ngSubmit)="saveTasks()">
       <div formArrayName="tasks">
         <!-- Itera attraverso gli elementi del form array -->

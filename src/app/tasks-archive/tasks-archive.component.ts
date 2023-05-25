@@ -15,7 +15,9 @@ export class TasksArchiveComponent implements OnInit {
   ngOnInit(): void {
     this._dataStorage.getEmployeeList().subscribe((employees) => {
       this.employees = employees;
-      this.filteredEmployees = [...employees];
+
+      this.filteredEmployees = [Object.values(this.employees)];
+      console.log(this.filteredEmployees);
     });
   }
 

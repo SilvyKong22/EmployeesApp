@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CoreService } from '../core/core.service';
 import { DialogComponent } from '../dialog/dialog.component';
+import { ProjAddEditComponent } from '../proj-add-edit/proj-add-edit.component';
 
 @Component({
   selector: 'app-employees-archive',
@@ -15,7 +16,6 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class EmployeesArchiveComponent implements OnInit {
   displayedColumns: string[] = [
-    'id',
     'firstName',
     'lastName',
     'email',
@@ -32,6 +32,8 @@ export class EmployeesArchiveComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   id: any;
+  @ViewChild('myModal') myModal: any;
+
   constructor(
     private _dialog: MatDialog,
     private _dataStorage: DataStorageService,
@@ -55,12 +57,29 @@ export class EmployeesArchiveComponent implements OnInit {
     });
   }
 
+  openAddProjForm() {
+    const dialogRef = this._dialog.open(ProjAddEditComponent);
+    // per chatgpt: -> qui devo aprire la modale di bootstrap
+    // const modal = this.myModal.nativeElement;
+    // modal.show();
+  }
+
   onGetEmployeeList() {
     this._dataStorage.getEmployeeList().subscribe({
       next: (res) => {
-        this.dataSource = new MatTableDataSource(res);
+        // ############ FIREBASE ############
+
+        const employeeArray = Object.values(res);
+        this.dataSource = new MatTableDataSource(employeeArray);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+        //
+        //
+        //
+        // ############ JSON SERVER ############
+        // this.dataSource = new MatTableDataSource(res);
+        // this.dataSource.sort = this.sort;
+        // this.dataSource.paginator = this.paginator;
       },
       error: (err: any) => {
         console.log(err);
