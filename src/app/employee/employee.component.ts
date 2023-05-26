@@ -33,10 +33,8 @@ export class EmployeeComponent implements OnInit {
     this.employeeID = this.route.snapshot.params['id'];
     this.isLoading = true;
     this._dataStorage.getEmployee(this.employeeID).subscribe((employee) => {
-      setTimeout(() => {
-        this.employee = employee;
-        this.isLoading = false;
-      }, 1000);
+      this.employee = employee;
+      this.isLoading = false;
     });
     this.initForm();
   }

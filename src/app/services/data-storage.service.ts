@@ -1,34 +1,61 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
+import { CoreService } from '../core/core.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataStorageService {
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private _coreService: CoreService) {}
   URIJsonServer = 'http://localhost:3000/employees';
   URIFirebase =
     'https://employees-app-d0372-default-rtdb.europe-west1.firebasedatabase.app/employees';
 
   // EMPLOYEES FIREBASE SERVER
   addEmployee(data: any): Observable<any> {
-    return this._http.post(`${this.URIFirebase}.json`, data);
+    this._coreService.showLoading();
+    return this._http.post(`${this.URIFirebase}.json`, data).pipe(
+      finalize(() => {
+        this._coreService.hideLoading();
+      })
+    );
   }
+
   updateEmployee(id: any, data: any): Observable<any> {
-    return this._http.put(`${this.URIFirebase}/${id}.json`, data);
+    this._coreService.showLoading();
+    return this._http.put(`${this.URIFirebase}/${id}.json`, data).pipe(
+      finalize(() => {
+        this._coreService.hideLoading();
+      })
+    );
   }
 
   getEmployee(id: any): Observable<any> {
-    return this._http.get(`${this.URIFirebase}/${id}.json`);
+    this._coreService.showLoading();
+    return this._http.get(`${this.URIFirebase}/${id}.json`).pipe(
+      finalize(() => {
+        this._coreService.hideLoading();
+      })
+    );
   }
 
   getEmployeeList(): Observable<any> {
-    return this._http.get(`${this.URIFirebase}.json`);
+    this._coreService.showLoading();
+    return this._http.get(`${this.URIFirebase}.json`).pipe(
+      finalize(() => {
+        this._coreService.hideLoading();
+      })
+    );
   }
 
   deleteEmployee(id: any): Observable<any> {
-    return this._http.delete(`${this.URIFirebase}/${id}.json`);
+    this._coreService.showLoading();
+    return this._http.delete(`${this.URIFirebase}/${id}.json`).pipe(
+      finalize(() => {
+        this._coreService.hideLoading();
+      })
+    );
   }
 
   // EMPLOYEES JSON SERVER

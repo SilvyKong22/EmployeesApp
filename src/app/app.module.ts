@@ -31,6 +31,7 @@ import { TasksArchiveComponent } from './tasks-archive/tasks-archive.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { ProjAddEditComponent } from './proj-add-edit/proj-add-edit.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SpinnerLoadingComponent } from './spinner-loading/spinner-loading.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     EmployeesArchiveComponent,
     TasksArchiveComponent,
     ProjAddEditComponent,
+    SpinnerLoadingComponent,
   ],
   imports: [
     BrowserModule,

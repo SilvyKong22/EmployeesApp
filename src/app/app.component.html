@@ -32,4 +32,5 @@
   </div>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<router-outlet> </router-outlet>
+<app-spinner-loading *ngIf="loading$ | async"></app-spinner-loading>
