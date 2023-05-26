@@ -15,7 +15,7 @@ import { CoreService } from '../core/core.service';
   styleUrls: ['./employee.component.scss'],
 })
 export class EmployeeComponent implements OnInit {
-  isLoading: boolean;
+  tasksEditMode = false;
   employeeID: number;
   employee: any = {};
   tasksForm: FormGroup;
@@ -31,12 +31,14 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.employeeID = this.route.snapshot.params['id'];
-    this.isLoading = true;
     this._dataStorage.getEmployee(this.employeeID).subscribe((employee) => {
       this.employee = employee;
-      this.isLoading = false;
     });
     this.initForm();
+    this.tasksForm.valueChanges.subscribe(() => {
+      this.tasksEditMode = this.tasksForm.valid;
+      console.log(this.tasksEditMode);
+    });
   }
 
   addTask() {
@@ -45,6 +47,7 @@ export class EmployeeComponent implements OnInit {
       new FormGroup({
         task: new FormControl(''),
         state: new FormControl('To do'),
+        priority: new FormControl('To do'),
       })
     );
   }
@@ -96,6 +99,7 @@ export class EmployeeComponent implements OnInit {
             new FormGroup({
               task: new FormControl(task.task),
               state: new FormControl(task.state),
+              priority: new FormControl(task.priority),
             })
           );
         });

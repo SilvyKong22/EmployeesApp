@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EmpAddEditComponent } from '../emp-add-edit/emp-add-edit.component';
 import { DataStorageService } from '../services/data-storage.service';
@@ -32,7 +32,7 @@ export class EmployeesArchiveComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   id: any;
-  @ViewChild('myModal') myModal: any;
+  @ViewChild('exampleModal') modal: ElementRef;
 
   constructor(
     private _dialog: MatDialog,
@@ -58,10 +58,9 @@ export class EmployeesArchiveComponent implements OnInit {
   }
 
   openAddProjForm() {
-    const dialogRef = this._dialog.open(ProjAddEditComponent);
-    // per chatgpt: -> qui devo aprire la modale di bootstrap
-    // const modal = this.myModal.nativeElement;
-    // modal.show();
+    const modalEl = this.modal.nativeElement;
+    modalEl.modal('show');
+    // const dialogRef = this._dialog.open(ProjAddEditComponent);
   }
 
   onGetEmployeeList() {

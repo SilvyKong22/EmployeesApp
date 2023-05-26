@@ -46,7 +46,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline">
             <mat-label>Priority</mat-label>
             <mat-select formControlName="priority">
               <mat-option
@@ -56,7 +56,7 @@
                 {{ priority }}
               </mat-option>
             </mat-select>
-          </mat-form-field> -->
+          </mat-form-field>
           <button mat-icon-button color="warn" (click)="removeTask(i)">
             <mat-icon>delete</mat-icon>
           </button>
@@ -71,7 +71,12 @@
         >
           Add
         </button>
-        <button type="submit" mat-raised-button color="primary">
+        <button
+          [disabled]="!tasksEditMode"
+          type="submit"
+          mat-raised-button
+          color="primary"
+        >
           Save Tasks
         </button>
       </div>
