@@ -13,12 +13,7 @@
 
   <mat-form-field appearance="outline" class="w-100">
     <mat-label>Filter by Employee</mat-label>
-    <input
-      matInput
-      (keyup)="filterByEmployee(input.value)"
-      placeholder="Ex. Mia"
-      #input
-    />
+    <input matInput (keyup)="filterByEmployee(input.value)" #input />
   </mat-form-field>
 
   <div class="table-responsive">
@@ -32,24 +27,28 @@
       </thead>
       <tbody>
         <ng-container *ngFor="let employee of filteredEmployees">
-          <tr
-            *ngFor="
-              let task of employee.tasks;
-              let i = index;
-              last as isLast;
-              first as isFirst
-            "
-            [ngClass]="{
-              tr_group_last: isLast,
-              tr_group_first: isFirst
-            }"
-          >
-            <td>
-              {{ i === 0 ? employee.firstName + " " + employee.lastName : "" }}
-            </td>
-            <td>{{ task.task }}</td>
-            <td>{{ task.state }}</td>
-          </tr>
+          <ng-container *ngIf="employee.tasks && employee.tasks.length > 0">
+            <tr
+              *ngFor="
+                let task of employee.tasks;
+                let i = index;
+                last as isLast;
+                first as isFirst
+              "
+              [ngClass]="{
+                tr_group_last: isLast,
+                tr_group_first: isFirst
+              }"
+            >
+              <td>
+                {{
+                  i === 0 ? employee.firstName + " " + employee.lastName : ""
+                }}
+              </td>
+              <td>{{ task.task }}</td>
+              <td>{{ task.state }}</td>
+            </tr>
+          </ng-container>
         </ng-container>
       </tbody>
     </table>

@@ -76,7 +76,6 @@ export class EmpAddEditComponent implements OnInit {
         task: task.task,
         state: task.state,
       }));
-      console.log(employeeData);
 
       if (this.data) {
         const dialogConfirm = this._dialog.open(DialogComponent, {

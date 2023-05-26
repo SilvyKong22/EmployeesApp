@@ -14,10 +14,11 @@ export class TasksArchiveComponent implements OnInit {
 
   ngOnInit(): void {
     this._dataStorage.getEmployeeList().subscribe((employees) => {
-      this.employees = employees;
+      this.employees = Object.values(employees);
 
-      this.filteredEmployees = [Object.values(this.employees)];
+      this.filteredEmployees = Object.values(this.employees);
       console.log(this.filteredEmployees);
+      console.log(this.employees);
     });
   }
 
