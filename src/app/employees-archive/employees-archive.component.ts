@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CoreService } from '../core/core.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ProjAddEditComponent } from '../proj-add-edit/proj-add-edit.component';
+import { filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-employees-archive',
@@ -41,7 +42,9 @@ export class EmployeesArchiveComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.onGetEmployeeList();
+    this._dataStorage
+      .getEmployeeList()
+      .subscribe((res) => this.handleGetEmployer(res));
   }
 
   openAddEmpForm() {
@@ -65,21 +68,6 @@ export class EmployeesArchiveComponent implements OnInit {
 
   onGetEmployeeList() {
     this._dataStorage.getEmployeeList().subscribe({
-      next: (res) => {
-        // ############ FIREBASE ############
-
-        const employeeArray = Object.values(res);
-        this.dataSource = new MatTableDataSource(employeeArray);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        //
-        //
-        //
-        // ############ JSON SERVER ############
-        // this.dataSource = new MatTableDataSource(res);
-        // this.dataSource.sort = this.sort;
-        // this.dataSource.paginator = this.paginator;
-      },
       error: (err: any) => {
         console.log(err);
       },
@@ -95,29 +83,41 @@ export class EmployeesArchiveComponent implements OnInit {
         type: 'warning',
       },
     });
+    // pipe  ->
+    dialogConfirm
+      .afterClosed()
+      .pipe(
+        filter((confirm) => confirm),
+        switchMap(() => {
+          return this._dataStorage.deleteEmployee(employee.id);
+        }),
+        switchMap((deletedEl) => {
+          this._coreService.openSnackBar('Employee deleted Succefully', 'done');
+          return this._dataStorage.getEmployeeList();
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          // ############ FIREBASE ############
+          this.handleGetEmployer(res);
+        },
+        error: (err: any) => {
+          this._dialog.open(DialogComponent, {
+            data: {
+              message: err.message,
+              action: 'Ok',
+              type: 'error',
+            },
+          });
+        },
+      });
+  }
 
-    dialogConfirm.afterClosed().subscribe((confirm) => {
-      if (confirm) {
-        this._dataStorage.deleteEmployee(employee.id).subscribe({
-          next: (res) => {
-            this._coreService.openSnackBar(
-              'Employee deleted Succefully',
-              'done'
-            );
-            this.onGetEmployeeList();
-          },
-          error: (err: any) => {
-            this._dialog.open(DialogComponent, {
-              data: {
-                message: err.message,
-                action: 'Ok',
-                type: 'error',
-              },
-            });
-          },
-        });
-      }
-    });
+  handleGetEmployer(response: any) {
+    const employeeArray = Object.values(response);
+    this.dataSource = new MatTableDataSource(employeeArray);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   openEditEmpForm(data: any) {
